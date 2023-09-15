@@ -5,7 +5,7 @@ import pickle
 
 root = Tk()
 root.title('TODO - List')
-root.geometry('500x300')
+root.geometry('500x500')
 
 font_list = Font(
     family="Helvetica",
@@ -46,7 +46,7 @@ def delete_task_item():
 
 def save_list():
     file_name = filedialog.asksaveasfilename(
-        initialdir="C:/Codsoft", title="Save File", filetypes=(("Dat Files", "*.dat"), ("All Files", "*.*"))
+        initialdir="C:/Codsoft/data", title="Save File", filetypes=(("Dat Files", "*.dat"), ("All Files", "*.*"))
     )
 
     if file_name:
@@ -70,7 +70,7 @@ def save_list():
 
 def open_list():
     file_name = filedialog.askopenfilename(
-        initialdir="C:/Desktop/Codsoft", title="Open File", filetypes=(("Dat Files", "*.dat"), ("All Files", "*.*"))
+        initialdir="C:/Desktop/Codsoft/data", title="Open File", filetypes=(("Dat Files", "*.dat"), ("All Files", "*.*"))
     )
     if file_name:
         my_list.delete(0, END)
@@ -87,18 +87,6 @@ def delete_list():
 
 
 # Design
-
-my_menu = Menu(root)
-root.config(menu=my_menu)
-
-file_menu = Menu(my_menu, tearoff=False)
-my_menu.add_cascade(label="File", menu=file_menu)
-
-file_menu.add_command(label="Save List", command=save_list)
-file_menu.add_command(label="Open List", command=open_list)
-file_menu.add_separator()
-file_menu.add_command(label="Clear List", command=delete_list)
-
 
 my_entry = Entry(root, font=Font, width=30, borderwidth=4)
 my_entry.pack(padx=20, pady=20)
@@ -117,6 +105,21 @@ add_button.grid(row=0, column=1, padx=20)
 task_done_button.grid(row=0, column=2)
 undo_task_button.grid(row=0, column=3, padx=20)
 delete_task_button.grid(row=0, column=4)
+
+#----------------------------------------------
+button_menu = Frame(root)
+button_menu.pack(pady=20)
+
+save_list = Button(button_menu, text="Save Task", command=save_list)
+open_list = Button(button_menu, text="Open Task", command=open_list)
+delete_list = Button(button_menu, text="Clear Task", command=delete_list)
+
+save_list.grid(row=0, column=0)
+open_list.grid(row=0, column=1, padx=20)
+delete_list.grid(row=0, column=2)
+
+
+#-----------------------------------------------
 
 
 my_frame = Frame(root)
